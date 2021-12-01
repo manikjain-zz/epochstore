@@ -68,7 +68,7 @@ Table of Contents
 
 ### Remote state and TF session management (optional)
 
-Set up an S3 bucket with replication, KMS keys for encrypting state files, dynamoDB table for state locking. You can read more about what we will setup here at this link: https://registry.terraform.io/modules/nozaq/remote-state-s3-backend/aws/latest.
+The following steps set up an S3 bucket with replication, KMS keys for encrypting state files, dynamoDB table for state locking. You can read more about what we will setup here at this link: https://registry.terraform.io/modules/nozaq/remote-state-s3-backend/aws/latest.
 
 1. `cd remote-state/`
 2. Populate the `terraform.tfvars` file as follows:
@@ -92,6 +92,13 @@ state_dynamo_db = "tf-remote-state-lock"
 5. Grab the output values from step 4 as per what you received, we will need these to create a remote backend in the deployment steps.
 
 ### Deployment
+
+The following steps mainly set up -
+
+An API Gateway with a custom domain using an ACM certificate.
+Three Lambda functions as in `src/handlers` with CloudWatch monitoring. S3 bucket for storing Lambda zip.
+DynamoDB table in two regions (as chosen) with point-in-time backups enabled and read/write capacity autoscaling.
+Route53 health checks (uses the `health-check.py` lambda function), traffic policy (weighted routing) and a policy record.
 
 1. You must be in the root folder.  If you did not follow the first optional setup, skip the next few steps and proceed to step 5 directly. 
 2. Populate the `backend.tfvars` as follows:
