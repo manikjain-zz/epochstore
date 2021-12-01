@@ -12,7 +12,7 @@ Table of Contents
   * [Scalability](#scalability)
   * [Security](#security)
   * [Monitoring](#monitoring)
-  * [Folder structure](#folder-structure)
+* [Folder structure](#folder-structure)
 * [Prerequisites](#prerequisites)
 * [Setup](#setup)
   * [Remote state and TF session management (optional)](#remote-state-and-tf-session-management-optional)
@@ -21,6 +21,8 @@ Table of Contents
 * [Test HA and failover](#test-ha-and-failover)
 
 ## Architecture
+
+![image](https://user-images.githubusercontent.com/21245503/144255050-0119d0ec-f4b4-4874-b493-19f689fdd0b9.png)
 
 ### Resiliency
 
@@ -41,7 +43,7 @@ Table of Contents
 
 1. CloudWatch logs all data and metrics related to Lambda function invocation and DynamoDB operations.
 
-### Folder structure
+## Folder structure
 
     .
     ├── modules (dir)                  # Custom terraform modules
