@@ -1,0 +1,1 @@
+{"filename": "builds/b9e75b504fc01ae715424acbbd99d11d9902c5125fd7192a05f68b8b4d05f4bd.zip", "runtime": "python3.6", "artifacts_dir": "builds", "build_plan": [["zip", "./src/handlers/health-check.py", null]]}

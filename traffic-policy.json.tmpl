@@ -1,0 +1,36 @@
+{
+    "AWSPolicyFormatVersion": "2015-10-01",
+    "RecordType": "CNAME",
+    "Endpoints": {
+      "endpoint-1": {
+        "Type": "value",
+        "Value": ${jsonencode(domain1)}
+        },
+      "endpoint-2": {
+        "Type": "value",
+        "Value": ${jsonencode(domain2)}
+        }
+      },
+    "Rules": {
+      "weighted-rule": {
+        "RuleType": "weighted",
+        "Items": [
+          {
+          "Weight": "50",
+          "EvaluateTargetHealth": true,
+          "EndpointReference": "endpoint-1",
+          "HealthCheck": ${jsonencode(healthcheck1)}
+
+          },
+          {
+          "Weight": "50",
+          "EvaluateTargetHealth": true,
+          "EndpointReference": "endpoint-2",
+          "HealthCheck": ${jsonencode(healthcheck2)}
+
+          }
+        ]
+      }
+    },
+    "StartRule": "weighted-rule"
+}

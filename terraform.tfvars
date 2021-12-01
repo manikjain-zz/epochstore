@@ -1,0 +1,7 @@
+dynamodb_table_name = "EpochStoreDB"
+accountId = "523764881531"
+region_a = "eu-central-1"
+region_b = "eu-west-3"
+domain = "api.epoch-store.xyz"
+aws_creds = "/Users/manik.jain/.aws/creds"
+aws_profile = "default"
