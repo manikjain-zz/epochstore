@@ -117,7 +117,7 @@ export AWS_SECRET_ACCESS_KEY=""
 ```
 4. Populate the `terraform.tfvars` file as follows. **Note:-** Your domain name will need to be managed by Route53. Be sure to create a hosted zone in Route53 with your domain name and change the nameservers in your domain provider settings to Route53 nameservers.
 ```
-dynamodb_table_name  =  "EpochStoreDB" # A name for the DB table
+dynamodb_table_name  =  "EpochStore" # A name for the DB table
 accountId  =  AWS_ACCOUNT_ID
 region_a  =  "eu-central-1" # Choose a region 1
 region_b  =  "eu-west-3" # Choose a region 2

@@ -14,7 +14,7 @@ const region = process.env.Region
 exports.handler = async (event, context) => {
 
     const { requestContext, path } = event;
-    const sourceIp = requestContext.identity.sourceIp;
+    // const sourceIp = requestContext.identity.sourceIp;
     const epochTime = requestContext.requestTimeEpoch;
 
     // All log statements are written to CloudWatch by default. For more information, see
@@ -25,7 +25,12 @@ exports.handler = async (event, context) => {
     // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#put-property
     const params = {
         TableName: tableName,
-        Item: { 'id': context.awsRequestId, 'epoch_time': epochTime, 'source_ip': sourceIp, 'region': region },
+        Item: { 
+            'id': context.awsRequestId, 
+            'epoch_time': epochTime, 
+            // 'source_ip': sourceIp, 
+            'region': region 
+        },
     };
     await docClient.put(params).promise();
 
