@@ -130,7 +130,19 @@ aws_profile  =  AWS_PROFILE
 7. Run `terraform plan` to check if everything looks good. Run `terraform apply` to apply the changes. **Note:-** Sometimes apply can fail on archiving the lambda functions, in this case, a re-run of `terraform apply` should be fine.
 8. Verify if the health checks in Route53 show as healthy.
 9. Run a POST API call: `curl -X POST https://your.domain.name/storeEpochTime`.
+
+Output:
+```
+$ curl -X POST https://api.epoch-store.xyz/storeEpochTime; echo
+"eu-west-3: Current epoch time 1638374543589 was stored in the DB."
+```
 10. Run a GET API call: `curl https://your.domain.name/getEpochStore` or browse `https://your.domain.name/getEpochStore`.
+
+Output:
+```
+$ curl https://api.epoch-store.xyz/getEpochStore; echo
+[{"region":"eu-west-3","id":"xxxxx-xxxx-xxx-xxx-xxxxxxx","epoch_time":1638374543589,"source_ip":"x.x.x.x"}]
+```
 
 ## Delete resources
 
@@ -139,5 +151,13 @@ Run `terraform destroy` in both the root and `remote-state` directory. (Skip run
 ## Test HA and failover
 
 1.  As you post on the API, it alternates between both regions. If one region is unavailable, all the traffic will be routed to the second region.
-2. To test a failover, purposefully fail a region by setting the `STATUS` environment variable to `fail` on the `health-check` lambda function.
+2. To test a failover, purposefully fail a region by setting the `STATUS` environment variable to `fail` on the `health-check` lambda function in any one region.
 3. The health checks for the modified region should now start to fail and all new traffic is automatically routed to the other region. Try making a few POST calls to verify if the other region is getting all the traffic.
+
+Health checks in Route53 (when healthy):
+
+<img width="1791" alt="healthy" src="https://user-images.githubusercontent.com/21245503/144271111-2a851150-a37f-449a-8abb-aad29c5753d9.png">
+
+Health check failing in Route53 after modifying `STATUS` env variable as above (when uhealthy):
+
+<img width="1790" alt="unhealthy" src="https://user-images.githubusercontent.com/21245503/144271585-c433681b-ad5a-43fb-94d7-2d2ae42c6583.png">
